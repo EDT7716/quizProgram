@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <stddef.h>
+#define _CRT_SECURE_NO_WARNINGS
+
+//player_scores.txt파일을 주 드라이브 바로 아래 생성하니 오류가 발생해서, 현재 경로를 외장 SSD로 설정해놓은 상태입니다.
 
 struct PlayerInfo {
     char name[10000];
@@ -11,17 +15,17 @@ struct PlayerInfo {
 
 // 사용자 정보를 파일에 저장하는 함수
 void savePlayerInfoToFile(struct PlayerInfo player) {
-    FILE* file = fopen("player_scores.txt", "a"); // 파일 열기 (이어쓰기 모드)
+    FILE* file = fopen("e:\\player_scores.txt", "a+"); // 파일 열기 (이어쓰기 모드)
     if (file != NULL) {
         fprintf(file, "%s %d %d\n", player.name, player.studentID, player.score); // 정보 파일에 저장
         fclose(file); // 파일 닫기
     }
-		else printf("File open Error.\n");
+    else printf("File open Error.\n");
 }
 
 // 사용자 정보를 파일에서 읽어오는 함수
 void loadPlayerInfoFromFile(struct PlayerInfo players[], int* numPlayers) {
-    FILE* file = fopen("player_scores.txt", "r"); // 파일 열기 (읽기 모드)
+    FILE* file = fopen("e:\\player_scores.txt", "r"); // 파일 열기 (읽기 모드)
     if (file != NULL) {
         while (fscanf(file, "%s %d %d", players[*numPlayers].name, &players[*numPlayers].studentID, &players[*numPlayers].score) != EOF) {
             (*numPlayers)++;
@@ -54,7 +58,7 @@ void displayRanking(struct PlayerInfo players[], int numPlayers) {
 
 
 int main() {
-    int quizType=0, studentID,score=0;
+    int quizType = 0, studentID, score = 0;
     char playerName[10000] = "null";
     printf("퀴즈를 시작합니다!");
 
@@ -179,7 +183,7 @@ int main() {
         printf("퀴즈가 종료되었습니다.\n");
         printf("%d %s 님의 점수는 %d점입니다.", studentID, playerName, score);
 
-        
+
     }//quizType==1일 때 실행되는게 여기까지. 한국사퀴즈 부분
 
 
@@ -192,7 +196,7 @@ int main() {
 
 
     if (quizType == 2) {
-        
+
         // 문제와 답안, 선지 배열
         char* questions[] = {
             "pride",
@@ -296,29 +300,29 @@ int main() {
         printf("퀴즈가 종료되었습니다.\n");
         printf("%d %s 님의 점수는 %d점입니다.", studentID, playerName, score);
 
-        
+
     }//quizType==2일때 실행되는 부분이 여기까지. 영어퀴즈 부문
 
 
     //여기에 다른 부문 삽입
 
-    
-        struct PlayerInfo player;
-        strcpy(player.name, playerName);
-        player.studentID = studentID;
-        player.score = score;
-        savePlayerInfoToFile(player);
 
-        // 파일에서 플레이어 정보 읽어오기
-        struct PlayerInfo players[100];
-        int numPlayers = 0;
-        loadPlayerInfoFromFile(players, &numPlayers);
+    struct PlayerInfo player;
+    strcpy(player.name, playerName);
+    player.studentID = studentID;
+    player.score = score;
+    savePlayerInfoToFile(player);
 
-        // 랭킹을 점수로 정렬
-        sortPlayersByScore(players, numPlayers);
+    // 파일에서 플레이어 정보 읽어오기
+    struct PlayerInfo players[100];
+    int numPlayers = 0;
+    loadPlayerInfoFromFile(players, &numPlayers);
 
-        // 랭킹 표시
-        displayRanking(players, numPlayers);
+    // 랭킹을 점수로 정렬
+    sortPlayersByScore(players, numPlayers);
 
-        return 0;
+    // 랭킹 표시
+    displayRanking(players, numPlayers);
+
+    return 0;
 }//main 닫히는곳
