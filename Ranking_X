@@ -199,12 +199,8 @@ int main() {
         displayRanking(players, numPlayers);
 
         return 0;
+        
     }//quizType==1일 때 실행되는게 여기까지. 한국사퀴즈 부분
-
-
-
-
-
 
 
 
