@@ -16,7 +16,16 @@
 6.기록을 txt형태의 파일로 저장, 원한다면 랭킹 출력
 
 
+    <각 헤더파일 설명>
+#include <stdio.h>:메인 헤더파일
 
+#include <stdlib.h>:난수 생성을 위한 헤더파일
+
+#include <time.h>:시간값을 통한 완전난수 생성을 위한 헤더파일
+
+#include <string.h>:구조체 형성을 위한 헤더파일
+
+#include <stddef.h>:NULL, EOF 연산자 정의를 위한 헤더파일
 
 
     <각 변수 설명>
@@ -45,3 +54,13 @@ int questionIndex:현제 출제된 문제의 인덱스를 나타냅니다.
 int userAnswer:사용자가 입력한 답안 번호를 저장하는 변수입니다.
 
 int correctAnswer:올바른 답안 출력을 위해 현제 출제되는 문제의 정답 선지 인덱스를 나타내는 변수입니다.
+
+
+    <정의된 함수 설명>
+savePlayerInfoToFile:사용자의 정보를 지정된 경로의 player_scores.txt 파일에 저장하는 함수
+
+loadPlayerInfoFromFile:사용자의 정보를 지정된 경로의 player_scores.txt 파일에서 읽는 함수
+
+sortPlayerByScore:사용자의 점수를 기준으로 버블 정렬을 사용해 내림차순으로 정리하는 함수
+
+displayRanking:정리된 랭킹을 출력하는 함수
