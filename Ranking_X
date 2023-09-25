@@ -55,7 +55,7 @@ void displayRanking(struct PlayerInfo players[], int numPlayers) {
 
 
 int main() {
-    int quizType=0, studentID;
+    int quizType=0, studentID,score=0;
     char playerName[10000] = "null";
     printf("퀴즈를 시작합니다!");
 
@@ -77,7 +77,6 @@ int main() {
 
 
     if (quizType == 1) {
-        int score = 0;
         // 문제와 답안, 선지 배열
         char* questions[] = {
             "기원전 18년경 고구려에서 내려온 유이민들이 한강 근처 위례성에 자리 잡고 세운 나라의 이름은?",
@@ -181,24 +180,6 @@ int main() {
         printf("퀴즈가 종료되었습니다.\n");
         printf("%d %s 님의 점수는 %d점입니다.", studentID, playerName, score);
 
-        struct PlayerInfo player;
-        strcpy(player.name, playerName);
-        player.studentID = studentID;
-        player.score = score;
-        savePlayerInfoToFile(player);
-
-        // 파일에서 플레이어 정보 읽어오기
-        struct PlayerInfo players[100];
-        int numPlayers = 0;
-        loadPlayerInfoFromFile(players, &numPlayers);
-
-        // 랭킹을 점수로 정렬
-        sortPlayersByScore(players, numPlayers);
-
-        // 랭킹 표시
-        displayRanking(players, numPlayers);
-
-        return 0;
         
     }//quizType==1일 때 실행되는게 여기까지. 한국사퀴즈 부분
 
@@ -212,7 +193,7 @@ int main() {
 
 
     if (quizType == 2) {
-        int score = 0;
+        
         // 문제와 답안, 선지 배열
         char* questions[] = {
             "pride",
@@ -316,11 +297,29 @@ int main() {
         printf("퀴즈가 종료되었습니다.\n");
         printf("%d %s 님의 점수는 %d점입니다.", studentID, playerName, score);
 
-        return 0;
+        
     }//quizType==2일때 실행되는 부분이 여기까지. 영어퀴즈 부문
 
 
     //여기에 다른 부문 삽입
 
     
+        struct PlayerInfo player;
+        strcpy(player.name, playerName);
+        player.studentID = studentID;
+        player.score = score;
+        savePlayerInfoToFile(player);
+
+        // 파일에서 플레이어 정보 읽어오기
+        struct PlayerInfo players[100];
+        int numPlayers = 0;
+        loadPlayerInfoFromFile(players, &numPlayers);
+
+        // 랭킹을 점수로 정렬
+        sortPlayersByScore(players, numPlayers);
+
+        // 랭킹 표시
+        displayRanking(players, numPlayers);
+
+        return 0;
 }//main 닫히는곳
