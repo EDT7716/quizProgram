@@ -69,7 +69,7 @@ int main() {
     printf(" %s님 환영합니다.\n", playerName);
 
     printf("\n퀴즈 부문을 선택해주세요");
-    printf("\n1)한국사 2)영어퀴즈 3)수학\n");
+    printf("\n1)한국사 2)영어퀴즈\n");
     scanf("%d", &quizType);
 
 
