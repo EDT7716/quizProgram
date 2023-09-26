@@ -3,7 +3,7 @@
 #include <time.h> //시간값을 통한 완전난수 생성을 위한 헤더파일
 #include <string.h> //구조체 형성을 위한 헤더파일
 #include <stddef.h> //NULL, EOF 연산자 정의를 위한 헤더파일
-#include <windows.h>
+#include <windows.h> //Sleep 함수 사용을 위한 헤더파일
 #define _CRT_SECURE_NO_WARNINGS //scanf 불안정성 관련 오류 무시
 
 
