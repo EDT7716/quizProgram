@@ -129,8 +129,7 @@ int main() {
         scanf("%d", &studentID);
         messageOutput("이름:",20);
         scanf("%s", &playerName);
-        printf("\n");
-        printf("%d", studentID);
+        printf("\n%d", studentID);
         messageOutput(" ", 20);
         printf("%s", playerName);
         messageOutput("님 환영합니다", 20);
