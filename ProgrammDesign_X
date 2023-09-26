@@ -3,6 +3,7 @@
 #include <time.h> //시간값을 통한 완전난수 생성을 위한 헤더파일
 #include <string.h> //구조체 형성을 위한 헤더파일
 #include <stddef.h> //NULL, EOF 연산자 정의를 위한 헤더파일
+#include <windows.h>
 #define _CRT_SECURE_NO_WARNINGS //scanf 불안정성 관련 오류 무시
 
 
@@ -47,11 +48,27 @@ void sortPlayersByScore(struct PlayerInfo players[], int numPlayers) {
     }
 }
 
+
+
+//글자 출력 연출을 위한 함수
+void messageOutput(char* message, int v) {
+    int length = strlen(message);
+
+    for (int i=0; i < length; i++) {
+
+
+        printf("%c", message[i]);
+        Sleep(v);
+    }
+}
+
+
 // 랭킹을 출력하는 함수
 void displayRanking(struct PlayerInfo players[], int numPlayers) {
     printf("\n랭킹:\n");
     for (int i = 0; i < numPlayers; i++) {
-        printf("%d. %s (학번: %d) - %d점\n", i + 1, players[i].name, players[i].studentID, players[i].score);
+        printf("%d. %s (학번: %d) - %d점", i + 1, players[i].name, players[i].studentID, players[i].score);
+        messageOutput("\n", 100);
     }
 }
 
@@ -59,17 +76,16 @@ void displayRanking(struct PlayerInfo players[], int numPlayers) {
 int main() {
     int quizType = 0, studentID, score = 0,startOption;
     char playerName[10000] = "null";
+    messageOutput("로딩중...", 300);
 
 
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    messageOutput("**********************************************************\n",10);
+    messageOutput("ver 1.0\n제작일자:20230925 \n제작자:EDT_7716\n",30);
+    messageOutput("**********************************************************\n\n",10);
 
-
-    printf("********************************************************************************************************************\n");
-    printf("**************************************ver 1.0 제작일자:20230925 제작자:EDT7716**************************************\n");
-    printf("********************************************************************************************************************\n\n\n\n\n\n\n\n\n");
-
-
-    printf("\t\t\t\t\t       [1]힘세고 강한 시작\n\n\n\n\n\n\n\n\n");
-    printf("\t\t\t\t\t       [2]랭킹보기\n\n");
+    messageOutput("[1]힘세고 강한 시작\n",20);
+    messageOutput("[2]랭킹보기\n",20);
     scanf("%d", &startOption);
 
 
@@ -86,13 +102,13 @@ int main() {
 
             displayRanking(players, numPlayers);
             printf("\n\n");
-            printf("[0]종료하기\n");
-            printf("[1]퀴즈 시작하기\n");
+            messageOutput("[0]종료하기\n",20);
+            messageOutput("[1]퀴즈 시작하기\n",20);
             int startOption_2;
             scanf("%d", &startOption_2);
 
             if (startOption_2 == 1) {
-                printf("\n\n퀴즈를 시작합니다!");
+                messageOutput("\n퀴즈를 시작합니다!",20);
                 break;
             }   
             else return 0;
@@ -100,7 +116,7 @@ int main() {
         }
 
         if (startOption == 1) {
-            printf("퀴즈를 시작합니다!");
+            messageOutput("\n퀴즈를 시작합니다!",20);
             break;
         }
     }
@@ -108,14 +124,16 @@ int main() {
     
 
 
-        printf("\n학번과 이름을 입력해주세요");
-        printf("\n학번:");
+        messageOutput("\n학번과 이름을 입력해주세요",30);
+        messageOutput("\n\n학번:",20);
         scanf("%d", &studentID);
-        printf("\n이름:");
+        messageOutput("이름:",20);
         scanf("%s", &playerName);
         printf("\n");
         printf("%d", studentID);
-        printf(" %s님 환영합니다.\n", playerName);
+        messageOutput(" ", 20);
+        printf("%s", playerName);
+        messageOutput("님 환영합니다", 20);
 
         printf("\n퀴즈 부문을 선택해주세요");
         printf("\n[1]한국사 [2]영어퀴즈\n");
@@ -197,13 +215,13 @@ int main() {
 
                 // 답안 출력
                 for (int j = 0; j < 4; j++) {
-                    printf("%d. %s\n", j + 1, answers[questionIndex][j]);
+                    printf("\n[%d] %s", j + 1, answers[questionIndex][j]);
                 }
 
                 int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
 
                 int userAnswer;
-                printf("답안을 선택하세요 (1-4): ");
+                printf("\n\n답안을 선택하세요 (1-4): ");
                 scanf("%d", &userAnswer);
 
                 // 사용자 답안 확인
@@ -313,7 +331,7 @@ int main() {
 
                     // 답안 출력
                 for (int j = 0; j < 4; j++) {
-                    printf("%d. %s\n", j + 1, answers[questionIndex][j]);
+                    printf("[%d] %s\n", j + 1, answers[questionIndex][j]);
                 }
 
                 int userAnswer;
@@ -366,7 +384,6 @@ int main() {
 
         // 랭킹 표시
         displayRanking(players, numPlayers);
-
 
         printf("\n수고하셨습니다.\n\n");
 
