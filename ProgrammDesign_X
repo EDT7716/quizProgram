@@ -3,7 +3,7 @@
 #include <time.h> //시간값을 통한 완전난수 생성을 위한 헤더파일
 #include <string.h> //구조체 형성을 위한 헤더파일
 #include <stddef.h> //NULL, EOF 연산자 정의를 위한 헤더파일
-#include <windows.h> //Sleep 함수 사용을 위한 헤더파일
+#include <windows.h>
 #define _CRT_SECURE_NO_WARNINGS //scanf 불안정성 관련 오류 무시
 
 
@@ -129,13 +129,14 @@ int main() {
         scanf("%d", &studentID);
         messageOutput("이름:",20);
         scanf("%s", &playerName);
-        printf("\n%d", studentID);
+        printf("\n");
+        printf("%d", studentID);
         messageOutput(" ", 20);
         printf("%s", playerName);
         messageOutput("님 환영합니다", 20);
 
-        printf("\n퀴즈 부문을 선택해주세요");
-        printf("\n[1]한국사 [2]영어퀴즈\n");
+        messageOutput("\n퀴즈 부문을 선택해주세요",20);
+        messageOutput("\n\n[1]한국사\n[2]영어퀴즈\n",20);
         scanf("%d", &quizType);
 
 
@@ -205,41 +206,61 @@ int main() {
             }
 
             // 랜덤 순서로 문제를 출제
-            printf("한국사 퀴즈를 시작합니다!\n");
-            printf("제시되는 문제에 대한 정답의 번호를 입력하시면 됩니다.\n");
-            printf("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n");
+            messageOutput("\n한국사 퀴즈를 시작합니다!\n",15);
+            messageOutput("제시되는 문제에 대한 정답의 번호를 입력하시면 됩니다.\n",15);
+            messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n",15);
+
             for (int i = 0; i < 9; i++) {
                 int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
                 printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
 
                 // 답안 출력
+
                 for (int j = 0; j < 4; j++) {
-                    printf("\n[%d] %s", j + 1, answers[questionIndex][j]);
+                    messageOutput("\n", 40);
+                    printf("[%d] %s", j + 1, answers[questionIndex][j]);
                 }
 
                 int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
 
                 int userAnswer;
-                printf("\n\n답안을 선택하세요 (1-4): ");
+                messageOutput("\n\n답안을 선택하세요 (1-4): ",20);
                 scanf("%d", &userAnswer);
 
                 // 사용자 답안 확인
                 if (userAnswer >= 1 && userAnswer <= 4) {
                     if (userAnswer == collects[questionIndex]) {
-                        printf("정답입니다. 1점을 획득합니다.\n");
+                        messageOutput("정답입니다. 1점을 획득합니다.\n",20);
                         score += 1;
-                        printf("현재 점수는 %d점입니다.\n\n", score);
+                        messageOutput("현재 점수는 ", 20);
+                        printf("%d", score);
+                        messageOutput("점입니다.\n\n", 20);
+                        
                     }
                     else {
-                        printf("오답입니다. 정답은 %d. %s 입니다.\n", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
-                        printf("점수 획득에 실패합니다.\n");
-                        printf("현재 점수는 %d점입니다.\n\n", score);
+
+                        messageOutput("오답입니다. 정답은 ", 20);
+                        printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                        messageOutput(" 입니다.", 20);
+                        
+                        messageOutput("점수 획득에 실패합니다.\n",20);
+
+                        messageOutput("현재 점수는 ", 20);
+                        printf("%d", score);
+                        messageOutput("점입니다.\n\n", 20);
+
                     }
                 }
                 else {
-                    printf("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n");
-                    printf("정답은 %d. %s 입니다.\n", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
-                    printf("현재 점수는 %d점입니다.\n\n", score);
+                    messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n",20);
+
+                    messageOutput("정답은 ", 20);
+                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    messageOutput(" 입니다.", 20);
+
+                    messageOutput("현재 점수는 ", 20);
+                    printf("%d", score);
+                    messageOutput("점입니다.\n\n", 20);
                 }
             }
 
@@ -319,41 +340,61 @@ int main() {
             }
 
             // 랜덤 순서로 문제를 출제
-            printf("영어퀴즈를 시작합니다!\n");
-            printf("제시되는 영어단어의 뜻으로 알맞은 답안의 번호를 입력하시면 됩니다.\n");
-            printf("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n");
+            messageOutput("\n영어퀴즈를 시작합니다!\n",20);
+            messageOutput("제시되는 영어단어의 뜻으로 알맞은 답안의 번호를 입력하시면 됩니다.\n",20);
+            messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n",20);
+            
             for (int i = 0; i < 9; i++) {
                 int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
                 printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
 
-                int correctAnswer = collects[questionIndex];//올바른 답을 불러오기 위한 인덱스값 저장
+                // 답안 출력
 
-                    // 답안 출력
                 for (int j = 0; j < 4; j++) {
-                    printf("[%d] %s\n", j + 1, answers[questionIndex][j]);
+                    messageOutput("\n", 40);
+                    printf("[%d] %s", j + 1, answers[questionIndex][j]);
                 }
 
+                int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
+
                 int userAnswer;
-                printf("답안을 선택하세요 (1-4): ");
+                messageOutput("\n\n답안을 선택하세요 (1-4): ", 20);
                 scanf("%d", &userAnswer);
 
                 // 사용자 답안 확인
                 if (userAnswer >= 1 && userAnswer <= 4) {
                     if (userAnswer == collects[questionIndex]) {
-                        printf("정답입니다. 1점을 획득합니다.\n");
+                        messageOutput("정답입니다. 1점을 획득합니다.\n", 20);
                         score += 1;
-                        printf("현재 점수는 %d점입니다.\n\n", score);
+                        messageOutput("현재 점수는 ", 20);
+                        printf("%d", score);
+                        messageOutput("점입니다.\n\n", 20);
+
                     }
                     else {
-                        printf("오답입니다. 정답은 %d. %s 입니다.\n", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
-                        printf("점수 획득에 실패합니다.\n");
-                        printf("현재 점수는 %d점입니다.\n\n", score);
+
+                        messageOutput("오답입니다. 정답은 ", 20);
+                        printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                        messageOutput(" 입니다.", 20);
+
+                        messageOutput("점수 획득에 실패합니다.\n", 20);
+
+                        messageOutput("현재 점수는 ", 20);
+                        printf("%d", score);
+                        messageOutput("점입니다.\n\n", 20);
+
                     }
                 }
                 else {
-                    printf("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n");
-                    printf("정답은 %d. %s 입니다.\n", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
-                    printf("현재 점수는 %d점입니다.\n\n", score);
+                    messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
+
+                    messageOutput("정답은 ", 20);
+                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    messageOutput(" 입니다.", 20);
+
+                    messageOutput("현재 점수는 ", 20);
+                    printf("%d", score);
+                    messageOutput("점입니다.\n\n", 20);
                 }
             }
 
@@ -366,25 +407,36 @@ int main() {
 
         //여기에 다른 부문 삽입
 
-
+        messageOutput("\n수고하셨습니다. 랭킹을 출력하시겠습니까?\n\n",20);
+        int rankingOutput;
+        messageOutput("[1]Y\n[2]N\n", 20);
+        scanf("%d",&rankingOutput);
+        
         struct PlayerInfo player;
         strcpy(player.name, playerName);
         player.studentID = studentID;
         player.score = score;
         savePlayerInfoToFile(player);
 
-        // 파일에서 플레이어 정보 읽어오기
-        struct PlayerInfo players[100];
-        int numPlayers = 0;
-        loadPlayerInfoFromFile(players, &numPlayers);
+        if (rankingOutput == 1) {
 
-        // 랭킹을 점수로 정렬
-        sortPlayersByScore(players, numPlayers);
 
-        // 랭킹 표시
-        displayRanking(players, numPlayers);
+            // 파일에서 플레이어 정보 읽어오기
+            struct PlayerInfo players[100];
+            int numPlayers = 0;
+            loadPlayerInfoFromFile(players, &numPlayers);
 
-        printf("\n수고하셨습니다.\n\n");
+            // 랭킹을 점수로 정렬
+            sortPlayersByScore(players, numPlayers);
+
+            // 랭킹 표시
+            displayRanking(players, numPlayers);
+
+
+            messageOutput("\n랭킹 출력이 완료되었습니다. 퀴즈를 종료합니다.\n\n", 30);
+        }
+
+        else messageOutput("\n퀴즈를 종료합니다.\n\n", 20);
 
         return 0;
     
