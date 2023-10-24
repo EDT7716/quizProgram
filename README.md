@@ -71,3 +71,9 @@ sortPlayerByScore:사용자의 점수를 기준으로 버블 정렬을 사용해
 messageOutput:글자 출력 연출을 위한 함수
 
 displayRanking:정리된 랭킹을 출력하는 함수
+
+
+    <주의사항>
+1.구동 프로그램으로 Microsoft Visual Studio를 사용할 경우 맨 윗줄에 #define _CRT_SECURE_NO_WARNINGS 코드를 추가하여 주십시오. 
+2. savePlayerInfoToFile, loadPlayerInfoFromFile 함수에서 scores.txt 파일의 경로를 지정할 때 주 드라이브 바로 밑으로 지정하지 마십시오. 다른 드라이브나 SSD 등의 경로를 지정하시기 바랍니다.
+	2-1.현재는 제작자의 SSD로 경로를 설정해놓은 상태입니다. 변경할 시 경로를 알맞은 드라이브로 변경하세요.    
