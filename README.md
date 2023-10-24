@@ -27,6 +27,7 @@
 
 #include <stddef.h>:NULL, EOF 연산자 정의를 위한 헤더파일
 
+#include <windows.h>:Sleep 명령어를 통한 딜레이 연출을 위한 헤더파일일
 
     <각 변수 설명>
 int quizType:퀴즈 부문 선택 시 값을 입력받는 변수로, 입력된 정수에 따라 해당 퀴즈를 출력합니다.
@@ -62,5 +63,7 @@ savePlayerInfoToFile:사용자의 정보를 지정된 경로의 player_scores.tx
 loadPlayerInfoFromFile:사용자의 정보를 지정된 경로의 player_scores.txt 파일에서 읽는 함수
 
 sortPlayerByScore:사용자의 점수를 기준으로 버블 정렬을 사용해 내림차순으로 정리하는 함수
+
+messageOutput:글자 출력 연출을 위한 함
 
 displayRanking:정리된 랭킹을 출력하는 함수
