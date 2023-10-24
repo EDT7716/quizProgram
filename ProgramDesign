@@ -92,7 +92,7 @@ int main() {
     messageOutput("ver 1.0\n제작일자:20230925 \n제작자:한주원\n", 30);
     messageOutput("**********************************************************\n\n", 10);
 
-    messageOutput("[1]힘세고 강한 시작\n", 20);
+    messageOutput("[1]퀴즈 시작하기\n", 20);
     messageOutput("[2]랭킹보기\n", 20);
     scanf("%d", &startOption);
 
