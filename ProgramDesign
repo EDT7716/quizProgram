@@ -224,7 +224,7 @@ int main() {
 
         while (1) {
 
-            if (start != 0)break;
+            if (start != 0){system("cls");break;}
 
         }
 
