@@ -144,7 +144,7 @@ int main() {
     messageOutput("님 환영합니다", 20);
 
     messageOutput("\n퀴즈 부문을 선택해주세요", 20);
-    messageOutput("\n\n[1]한국사\n[2]영어퀴즈\n", 20);
+    messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학", 20);
     scanf("%d", &quizType);
 
 
@@ -224,7 +224,12 @@ int main() {
 
         while (1) {
 
-            if (start != 0){system("cls");break;}
+            if (start != 0){
+                
+                system("cls");
+                break;
+                
+            }
 
         }
 
@@ -368,6 +373,317 @@ int main() {
 
         while (1) {
 
+            if (start != 0){
+                system("cls");
+                break;
+            }
+
+        }
+
+        for (int i = 0; i < 9; i++) {
+            int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
+            printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
+
+            // 답안 출력
+
+            for (int j = 0; j < 4; j++) {
+                messageOutput("\n", 40);
+                printf("[%d] %s", j + 1, answers[questionIndex][j]);
+            }
+
+            int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
+
+            int userAnswer;
+            messageOutput("\n\n답안을 선택하세요 (1-4): ", 20);
+            scanf("%d", &userAnswer);
+
+            // 사용자 답안 확인
+            if (userAnswer >= 1 && userAnswer <= 4) {
+                if (userAnswer == collects[questionIndex]) {
+                    messageOutput("정답입니다. 1점을 획득합니다.\n", 20);
+                    score += 1;
+                    messageOutput("현재 점수는 ", 20);
+                    printf("%d", score);
+                    messageOutput("점입니다.\n\n", 20);
+
+                }
+                else {
+
+                    messageOutput("오답입니다. 정답은 ", 20);
+                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    messageOutput(" 입니다.", 20);
+
+                    messageOutput("점수 획득에 실패합니다.\n", 20);
+
+                    messageOutput("현재 점수는 ", 20);
+                    printf("%d", score);
+                    messageOutput("점입니다.\n\n", 20);
+
+                }
+            }
+            else {
+                messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
+
+                messageOutput("정답은 ", 20);
+                printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                messageOutput(" 입니다.", 20);
+
+                messageOutput("현재 점수는 ", 20);
+                printf("%d", score);
+                messageOutput("점입니다.\n\n", 20);
+            }
+        }
+
+
+
+
+
+//수학퀴즈 파트
+
+
+
+
+
+
+
+if (quizType == 3) {
+
+        // 문제와 답안, 선지 배열
+        char* questions[] = {
+            "3x + 5 = 2x - 7, x = ?",
+            "x^2 - 4x + 4 = 0, x^3 = ?",
+            "2x + 5 < 13, x의 범위?",
+            "3a - 2b = 7, 2a + 4b = 10, a * b = ?",
+            "3^3 * 4^2 / 2^3 * 5^2 = ?",
+            "x^2 - y^2 = 21 / x - y = 3, x^3 + 2xy - y^4?",
+            "10명의 사람들 중 4명을 뽑을 때, 가능한 경우의 수를 고르시오.",
+            "(3,4)와 (-1,2)를 지나는 직선이 ax + by = 5일때, a + a^3 - 7ab를 구하시오.",
+            "log20 + log5 = ?"
+        };
+
+        int collects[] = {
+            2,
+            1,
+            1,
+            1,
+            4,
+            2,
+            4,
+            3,
+            2
+        };
+
+        int collects[] = {
+            2,
+            1,
+            1,
+            1,
+            4,
+            2,
+            4,
+            3,
+            2
+        };
+        
+        char* answers[][4] = {
+            {"-10", "-12", "-15", "-19"},
+            {"8", "27", "64", "125"},
+            {"x < 4", "x > 4", "x < 3", "x < 2"},
+            {"3", "6", "8", "10"},
+            {"1075", "1150", "1200", "1350"},
+            {"113", "129", "137", "153"},
+            {"120", "150", "180", "210"},
+            {"8", "10", "12", "14"},
+            {"0", "2", "4", "5"}
+        };
+
+
+        srand(time(NULL)); // 랜덤 시드 설정
+        int questionOrder[9]; // 문제 순서를 저장할 배열
+
+        // 1에서 9까지의 숫자를 무작위로 생성하여 배열에 저장
+        for (int i = 0; i < 9; i++) {
+            int randomNumber, exists;
+
+            do {
+                exists = 0;
+                randomNumber = rand() % 9 + 1; // 1에서 9까지의 랜덤 숫자 생성
+
+                // 생성한 숫자가 배열에 이미 존재하는지 확인
+                for (int j = 0; j < i; j++) {
+                    if (questionOrder[j] == randomNumber) {
+                        exists = 1;
+                        break;
+                    }
+                }
+            } while (exists);
+
+            questionOrder[i] = randomNumber; // 숫자를 배열에 저장
+        }
+
+        // 랜덤 순서로 문제를 출제
+        messageOutput("\수학퀴즈를 시작합니다!\n", 20);
+        messageOutput("문제에서 등장하는 수로호 중 *은 곱하기, /은 나누기, n^k는 n의 k제곱으로 이해하시면 됩니다..\n", 20);
+        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 20);
+        messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 15);
+
+        char start;
+        scanf("%s", &start);
+
+        while (1) {
+
+            if (start != 0){
+                system("cls");
+                break;
+            }
+
+        }
+
+        for (int i = 0; i < 9; i++) {
+            int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
+            printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
+
+            // 답안 출력
+
+            for (int j = 0; j < 4; j++) {
+                messageOutput("\n", 40);
+                printf("[%d] %s", j + 1, answers[questionIndex][j]);
+            }
+
+            int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
+
+            int userAnswer;
+            messageOutput("\n\n답안을 선택하세요 (1-4): ", 20);
+            scanf("%d", &userAnswer);
+
+            // 사용자 답안 확인
+            if (userAnswer >= 1 && userAnswer <= 4) {
+                if (userAnswer == collects[questionIndex]) {
+                    messageOutput("정답입니다. 1점을 획득합니다.\n", 20);
+                    score += 1;
+                    messageOutput("현재 점수는 ", 20);
+                    printf("%d", score);
+                    messageOutput("점입니다.\n\n", 20);
+
+                }
+                else {
+
+                    messageOutput("오답입니다. 정답은 ", 20);
+                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    messageOutput(" 입니다.", 20);
+
+                    messageOutput("점수 획득에 실패합니다.\n", 20);
+
+                    messageOutput("현재 점수는 ", 20);
+                    printf("%d", score);
+                    messageOutput("점입니다.\n\n", 20);
+
+                }
+            }
+            else {
+                messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
+
+                messageOutput("정답은 ", 20);
+                printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                messageOutput(" 입니다.", 20);
+
+                messageOutput("현재 점수는 ", 20);
+                printf("%d", score);
+                messageOutput("점입니다.\n\n", 20);
+            }
+        }
+        printf("퀴즈가 종료되었습니다.\n");
+        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);
+
+
+    }
+    
+    
+    
+    
+    
+    
+    //물리학파트 시작
+    
+    
+    
+    
+    
+    if (quizType == 4) {
+
+        // 문제와 답안, 선지 배열
+        char* questions[] = {
+            "움직이고 있는 물체가 일직선으로 등가속도 운동을 하고 있다.\n이 물체의 처음 측정 속도가 4m/s, 마지막 측정 속도가 8m/s이였으며, 이 기간동안 8m만큼 움직였을 때, \n이 물체의 가속도는 ?m/s^2인가?",
+            "지면 위에 무게가 6kg인 물체가 있으며, 그 위에 무게가 8kg인 물체가 있다.\n아래에 있는 물체가 지면에 의해 받는 수직항력은?\n(중력가속도는 10m\s^2이다.)",
+            "물체가 받는 충격력의 크기를 줄이는 일상생활의 예시로 옳지 않은 것은?",
+            "용수철 상수가 20N/m인 용수철에 31kg인 물체가 2m/s의 속도로 움직이고 있으며, \n이때 용수철의 길이가 처음보다 7m 늘어난 상태일 때, 물체가 갖는 역학적 에너지의 총합을 구하시오.",
+            "열역학 과정 중 부피가 일정한 과정을 무엇이라 하는가?",
+            "두 점전하가 존재하며, 각각의 점전하의 크기가 각각 +q, +2q이고 이들이 떨어진 거리가 3r일때,\n두 점전하 사이에 작용하는 힘의 크기를 F라 하자. \n두 점전하가 2r만큼 떨어져 있고, 각각의 점전하의 크기는 -6q, +8q일때,\n이 두 점전하에 작용하는 힘의 크기를 구하시오.",
+            "다음 중 반도체에 해당하는 것은?",
+            "원형 코일 위에서 S극을 아래로 하여 자석에 가까이 하였다.\n이때 코일의 위쪽에 유도되는 극의 종류와 전류의 방향을 알맞게 고른 선지를 고르시오.",
+            "다음 중 '매질의 한 점이 1회 진동하는 데 걸리는 시간'을 무엇이라 하는가?"
+        };
+
+        int collects[] = {
+            3,
+            4,
+            3,
+            4,
+            1,
+            2,
+            2,
+            3,
+            1
+        };
+
+        char* answers[][4] = {
+            {"1", "2", "3", "4"},
+            {"60N", "80N", "120N", "140N"},
+            {"에어백", "헬멧", "대포의 포신", "야구 글러브"},
+            {"468J", "494J", "521J", "552J"},
+            {"등적과정", "등압과정", "등온과정", "단열과정"},
+            {"48F", "54F", "72F", "108F"},
+            {"금", "Ge", "고무", "Al"},
+            {"N극, 시계방향", "N극, 반시계방향", "S극, 시계방향", "S극, 반시계방향"},
+            {"주기", "위상", "헤르츠(Hz)", "진폭"}
+        };
+
+
+        srand(time(NULL)); // 랜덤 시드 설정
+        int questionOrder[9]; // 문제 순서를 저장할 배열
+
+        // 1에서 9까지의 숫자를 무작위로 생성하여 배열에 저장
+        for (int i = 0; i < 9; i++) {
+            int randomNumber, exists;
+
+            do {
+                exists = 0;
+                randomNumber = rand() % 9 + 1; // 1에서 9까지의 랜덤 숫자 생성
+
+                // 생성한 숫자가 배열에 이미 존재하는지 확인
+                for (int j = 0; j < i; j++) {
+                    if (questionOrder[j] == randomNumber) {
+                        exists = 1;
+                        break;
+                    }
+                }
+            } while (exists);
+
+            questionOrder[i] = randomNumber; // 숫자를 배열에 저장
+        }
+
+        // 랜덤 순서로 문제를 출제
+        messageOutput("\물리퀴즈를 시작합니다!\n", 20);
+        messageOutput("제시되는 문제를 풀고 알맞은 답안의 번호를 입력하시면 됩니다.\n", 20);
+        messageOutput("이 문제에 나오는 모든 문제들은 물리1에 나오는 내용이니, 풀기 직전 본인이 물리1 선택자인지 확인해주시길 바랍니다.\n", 20);
+        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 20);
+        messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 15);
+
+        char start;
+        scanf("%s", &start);
+
+        while (1) {
+
             if (start != 0)break;
 
         }
@@ -430,7 +746,8 @@ int main() {
         printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);
 
 
-    }//quizType==2일때 실행되는 부분이 여기까지. 영어퀴즈 부문
+    }
+    
 
 
     //여기에 다른 부문 삽입
