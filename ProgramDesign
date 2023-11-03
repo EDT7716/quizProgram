@@ -87,9 +87,9 @@ int main() {
     char playerName[10000] = "null";
 
    
-    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     messageOutput("**********************************************************\n", 10);
-    messageOutput("ver 1.0\n제작일자:20230925 \n제작자:한주원\n", 30);
+    messageOutput("ver 1.7\n제작일자:20231103 \n프로그램 제작:10133 한주원\n\n---문제 출제---\n[한국사]:10133 한주원\n[영어]:10117 윤지민\n[수학, 물리학]:20431 조승현", 30);
     messageOutput("**********************************************************\n\n", 10);
 
     messageOutput("[1]퀴즈 시작하기\n", 20);
