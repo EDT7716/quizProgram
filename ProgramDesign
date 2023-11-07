@@ -90,7 +90,7 @@ int main() {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     messageOutput("**********************************************************\n", 10);
     messageOutput("ver 1.7\n제작일자:20231103 \n프로그램 제작:10133 한주원\n\n---문제 출제---\n[한국사]:10133 한주원\n[영어]:10117 윤지민\n[수학, 물리학]:20431 조승현", 30);
-    messageOutput("**********************************************************\n\n", 10);
+    messageOutput("\n**********************************************************\n\n", 10);
 
     messageOutput("[1]퀴즈 시작하기\n", 20);
     messageOutput("[2]랭킹보기\n", 20);
@@ -143,9 +143,18 @@ int main() {
     printf("%s", playerName);
     messageOutput("님 환영합니다", 20);
 
-    messageOutput("\n퀴즈 부문을 선택해주세요", 20);
-    messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학", 20);
+	while(1){
+		
+	messageOutput("\n퀴즈 부문을 선택해주세요", 20);
+    messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학\n", 20);
     scanf("%d", &quizType);
+	
+	if (0<quizType<=4) break;
+	else messageOutput("잘못된 입력입니다. 1-4의 숫자를 입력하세요.",15);
+	
+	}
+
+    
 
 
     //한국사 파트
@@ -296,7 +305,10 @@ int main() {
 
 
 
+
     //영어퀴즈 파트
+
+
 
 
     if (quizType == 2) {
@@ -433,14 +445,12 @@ int main() {
                 messageOutput("점입니다.\n\n", 20);
             }
         }
+	}
 
 
 
 
-
-//수학퀴즈 파트
-
-
+	//수학퀴즈 파트
 
 
 
@@ -473,17 +483,6 @@ if (quizType == 3) {
             2
         };
 
-        int collects[] = {
-            2,
-            1,
-            1,
-            1,
-            4,
-            2,
-            4,
-            3,
-            2
-        };
         
         char* answers[][4] = {
             {"-10", "-12", "-15", "-19"},
@@ -522,9 +521,9 @@ if (quizType == 3) {
         }
 
         // 랜덤 순서로 문제를 출제
-        messageOutput("\수학퀴즈를 시작합니다!\n", 20);
-        messageOutput("문제에서 등장하는 수로호 중 *은 곱하기, /은 나누기, n^k는 n의 k제곱으로 이해하시면 됩니다..\n", 20);
-        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 20);
+        messageOutput("\수학퀴즈를 시작합니다!\n", 15);
+        messageOutput("문제에서 등장하는 수학 기호 중 *은 곱하기, /은 나누기, n^k는 n의 k제곱으로 이해하시면 됩니다..\n",15);
+        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 15);
         messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 15);
 
         char start;
@@ -598,12 +597,11 @@ if (quizType == 3) {
 
     }
     
+
     
     
     
-    
-    
-    //물리학파트 시작
+    //물리학퀴즈 파트 
     
     
     
@@ -674,9 +672,9 @@ if (quizType == 3) {
 
         // 랜덤 순서로 문제를 출제
         messageOutput("\물리퀴즈를 시작합니다!\n", 20);
-        messageOutput("제시되는 문제를 풀고 알맞은 답안의 번호를 입력하시면 됩니다.\n", 20);
-        messageOutput("이 문제에 나오는 모든 문제들은 물리1에 나오는 내용이니, 풀기 직전 본인이 물리1 선택자인지 확인해주시길 바랍니다.\n", 20);
-        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 20);
+        messageOutput("제시되는 문제를 풀고 알맞은 답안의 번호를 입력하시면 됩니다.\n", 15);
+        messageOutput("이 문제에 나오는 모든 문제들은 물리1에 나오는 내용이니, 풀기 직전 본인이 물리1 선택자인지 확인해주시길 바랍니다.\n", 15);
+        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 15);
         messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 15);
 
         char start;
@@ -684,7 +682,10 @@ if (quizType == 3) {
 
         while (1) {
 
-            if (start != 0)break;
+            if (start != 0){
+            	system("cls");
+            	break;
+			}
 
         }
 
@@ -771,7 +772,7 @@ if (quizType == 3) {
         int numPlayers = 0;
         loadPlayerInfoFromFile(players, &numPlayers);
 
-        // 랭킹을 점수로 정렬
+        // 랭킹을 점수 순으로 정렬
         sortPlayersByScore(players, numPlayers);
 
         // 랭킹 표시
@@ -784,5 +785,6 @@ if (quizType == 3) {
     else messageOutput("\n퀴즈를 종료합니다.\n\n", 20);
 
     return 0;
-
+    
+	
 }//main 닫히는곳
