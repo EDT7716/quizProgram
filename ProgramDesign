@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> //메인 헤더파일
 #include <stdlib.h> //난수 생성을 위한 헤더파일
 #include <time.h> //시간값을 통한 완전난수 생성을 위한 헤더파일
@@ -8,10 +9,10 @@
 /*
 
 ※주의사항
-1.구동 프로그램으로 Microsoft Visual Studio를 사용할 경우 맨 윗줄에 #define _CRT_SECURE_NO_WARNINGS 코드를 추가하여 주십시오. 
+1.구동 프로그램으로 Microsoft Visual Studio를 사용할 경우 맨 윗줄에 #define _CRT_SECURE_NO_WARNINGS 코드를 추가하여 주십시오.
 2. savePlayerInfoToFile, loadPlayerInfoFromFile 함수에서 scores.txt 파일의 경로를 지정할 때 주 드라이브 바로 밑으로 지정하지 마십시오. 다른 드라이브나 SSD 등의 경로를 지정하시기 바랍니다.
-	2-1.현재는 제작자의 SSD로 경로를 설정해놓은 상태입니다. 변경할 시 경로를 알맞은 드라이브로 변경하세요.
-	 
+    2-1.현재는 제작자의 SSD로 경로를 설정해놓은 상태입니다. 변경할 시 경로를 알맞은 드라이브로 변경하세요.
+
 */
 
 
@@ -57,7 +58,6 @@ void sortPlayersByScore(struct PlayerInfo players[], int numPlayers) {
 }
 
 
-
 //글자 출력 연출을 위한 함수
 void messageOutput(char* message, int v) {
     int length = strlen(message);
@@ -82,18 +82,20 @@ void displayRanking(struct PlayerInfo players[], int numPlayers) {
 
 
 
+
+
 int main() {
     int quizType = 0, studentID, score = 0, startOption;
     char playerName[10000] = "null";
 
-   
+
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     messageOutput("**********************************************************\n", 10);
-    messageOutput("ver 1.7\n제작일자:20231103 \n프로그램 제작:10133 한주원\n\n---문제 출제---\n[한국사]:10133 한주원\n[영어]:10117 윤지민\n[수학, 물리학]:20431 조승현", 30);
+    messageOutput("ver 1.9\n제작일자:20231118 \n프로그램 제작:10133 한주원\n\n---문제 출제---\n[한국사]:10133 한주원\n[영어]:10117 윤지민\n[수학, 물리학]:20431 조승현", 20);
     messageOutput("\n**********************************************************\n\n", 10);
 
-    messageOutput("[1]퀴즈 시작하기\n", 20);
-    messageOutput("[2]랭킹보기\n", 20);
+    messageOutput("[1]퀴즈 시작하기\n", 15);
+    messageOutput("[2]랭킹보기\n", 15);
     scanf("%d", &startOption);
 
 
@@ -116,7 +118,7 @@ int main() {
             scanf("%d", &startOption_2);
 
             if (startOption_2 == 1) {
-                messageOutput("\n퀴즈를 시작합니다!", 20);
+                messageOutput("\n퀴즈를 시작합니다!", 15);
                 break;
             }
             else return 0;
@@ -124,7 +126,7 @@ int main() {
         }
 
         if (startOption == 1) {
-            messageOutput("\n퀴즈를 시작합니다!", 20);
+            messageOutput("\n퀴즈를 시작합니다!", 15);
             break;
         }
     }
@@ -132,29 +134,29 @@ int main() {
 
 
 
-    messageOutput("\n학번과 이름을 입력해주세요", 30);
-    messageOutput("\n\n학번:", 20);
+    messageOutput("\n학번과 이름을 입력해주세요", 20);
+    messageOutput("\n\n학번:", 15);
     scanf("%d", &studentID);
-    messageOutput("이름:", 20);
+    messageOutput("이름:", 15);
     scanf("%s", &playerName);
     printf("\n");
     printf("%d", studentID);
     messageOutput(" ", 20);
-    printf("%s", playerName);
+    messageOutput(playerName, 20);
     messageOutput("님 환영합니다", 20);
 
-	while(1){
-		
-	messageOutput("\n퀴즈 부문을 선택해주세요", 20);
-    messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학\n", 20);
-    scanf("%d", &quizType);
-	
-	if (0<quizType<=4) break;
-	else messageOutput("잘못된 입력입니다. 1-4의 숫자를 입력하세요.",15);
-	
-	}
+    while (1) {
 
-    
+        messageOutput("\n퀴즈 부문을 선택해주세요", 20);
+        messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학\n", 20);
+        scanf("%d", &quizType);
+
+        if (0 < quizType <= 4) break;
+        else messageOutput("잘못된 입력입니다. 1-4의 숫자를 입력하세요.", 20);
+
+    }
+
+
 
 
     //한국사 파트
@@ -223,34 +225,40 @@ int main() {
         }
 
         // 랜덤 순서로 문제를 출제
-        messageOutput("\n한국사 퀴즈를 시작합니다!\n", 15);
-        messageOutput("제시되는 문제에 대한 정답의 번호를 입력하시면 됩니다.\n", 15);
-        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 15);
-        messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 15);
+        messageOutput("\n한국사 퀴즈를 시작합니다!\n", 20);
+        messageOutput("제시되는 문제에 대한 정답의 번호를 입력하시면 됩니다.\n", 20);
+        messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 20);
+        messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 20);
 
         char start;
         scanf("%s", &start);
 
         while (1) {
 
-            if (start != 0){
-                
+            if (start != 0) {
+
                 system("cls");
                 break;
-                
+
             }
 
         }
 
         for (int i = 0; i < 9; i++) {
             int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
-            printf("\n문제 %d: %s\n", i + 1, questions[questionIndex]);
+            messageOutput("\n문제 ", 20);
+            printf("%d", i + 1);
+            messageOutput(": ", 20);
+            messageOutput(questions[questionIndex], 20);
+            messageOutput("\n", 20);
+
 
             // 답안 출력
 
             for (int j = 0; j < 4; j++) {
                 messageOutput("\n", 100);
-                printf("[%d] %s", j + 1, answers[questionIndex][j]);
+                printf("[%d]", j + 1);
+                messageOutput(answers[questionIndex][j], 20);
             }
 
             int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
@@ -272,7 +280,9 @@ int main() {
                 else {
 
                     messageOutput("오답입니다. 정답은 ", 20);
-                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    //printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    printf("[%d] ", collects[questionIndex]);
+                    messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                     messageOutput(" 입니다.", 20);
 
                     messageOutput("점수 획득에 실패합니다.\n", 20);
@@ -287,7 +297,8 @@ int main() {
                 messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
 
                 messageOutput("정답은 ", 20);
-                printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                printf("[%d] ", collects[questionIndex]);
+                messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                 messageOutput(" 입니다.", 20);
 
                 messageOutput("현재 점수는 ", 20);
@@ -296,11 +307,18 @@ int main() {
             }
         }
 
-        printf("퀴즈가 종료되었습니다.\n");
-        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);
+        /*printf("퀴즈가 종료되었습니다.\n");
+        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);*/
+        messageOutput("퀴즈가 종료되었습니다.\n", 20);
+        printf("%d ", studentID);
+        messageOutput(playerName, 20);
+        messageOutput("님의 점수는 ", 20);
+        printf("%d", score);
+        messageOutput(" 점입니다.\n", 20);
 
 
-    }//quizType==1일 때 실행되는게 여기까지. 한국사퀴즈 부분
+
+    }
 
 
 
@@ -312,7 +330,6 @@ int main() {
 
 
     if (quizType == 2) {
-
         // 문제와 답안, 선지 배열
         char* questions[] = {
             "pride",
@@ -385,22 +402,30 @@ int main() {
 
         while (1) {
 
-            if (start != 0){
+            if (start != 0) {
+
                 system("cls");
                 break;
+
             }
 
         }
 
         for (int i = 0; i < 9; i++) {
             int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
-            printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
+            messageOutput("\n문제 ", 20);
+            printf("%d", i + 1);
+            messageOutput(": ", 20);
+            messageOutput(questions[questionIndex], 20);
+            messageOutput("\n", 20);
+
 
             // 답안 출력
 
             for (int j = 0; j < 4; j++) {
-                messageOutput("\n", 40);
-                printf("[%d] %s", j + 1, answers[questionIndex][j]);
+                messageOutput("\n", 100);
+                printf("[%d]", j + 1);
+                messageOutput(answers[questionIndex][j], 20);
             }
 
             int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
@@ -422,7 +447,9 @@ int main() {
                 else {
 
                     messageOutput("오답입니다. 정답은 ", 20);
-                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    //printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    printf("[%d] ", collects[questionIndex]);
+                    messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                     messageOutput(" 입니다.", 20);
 
                     messageOutput("점수 획득에 실패합니다.\n", 20);
@@ -437,7 +464,8 @@ int main() {
                 messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
 
                 messageOutput("정답은 ", 20);
-                printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                printf("[%d] ", collects[questionIndex]);
+                messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                 messageOutput(" 입니다.", 20);
 
                 messageOutput("현재 점수는 ", 20);
@@ -445,29 +473,40 @@ int main() {
                 messageOutput("점입니다.\n\n", 20);
             }
         }
-	}
+
+        /*printf("퀴즈가 종료되었습니다.\n");
+        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);*/
+        messageOutput("퀴즈가 종료되었습니다.\n", 20);
+        printf("%d ", studentID);
+        messageOutput(playerName, 20);
+        messageOutput("님의 점수는 ", 20);
+        printf("%d", score);
+        messageOutput(" 점입니다.\n", 20);
+
+
+
+    }
 
 
 
 
-	//수학퀴즈 파트
+    //수학퀴즈 파트
 
 
 
 
 
-if (quizType == 3) {
-
+    if (quizType == 3) {
         // 문제와 답안, 선지 배열
         char* questions[] = {
             "3x + 5 = 2x - 7, x = ?",
-            "x^2 - 4x + 4 = 0, x^3 = ?",
-            "2x + 5 < 13, x의 범위로 올바른 것은?",
+            "x² - 4x + 4 = 0, x³ = ?",
+            "2x + 5 < 13, x의 범위는?",
             "3a - 2b = 7, 2a + 4b = 10, a * b = ?",
-            "3^3 * 4^2 / 2^3 * 5^2 = ?",
-            "x^2 - y^2 = 21 / x - y = 3, x^3 + 2xy - y^4?",
+            "3³ * 4² / 2³ * 5² = ?",
+            "x² - y² = 21 / x - y = 3일 때, x³ + 2xy - y⁴의 값은?",
             "10명의 사람들 중 4명을 뽑을 때, 가능한 경우의 수를 고르시오.",
-            "(3,4)와 (-1,2)를 지나는 직선이 ax + by = 5일때, a + a^3 - 7ab를 구하시오.",
+            "(3,4)와 (-1,2)를 지나는 직선이 ax + by = 5일때, a + a³ - 7ab를 구하시오.",
             "log20 + log5 = ?"
         };
 
@@ -483,7 +522,6 @@ if (quizType == 3) {
             2
         };
 
-        
         char* answers[][4] = {
             {"-10", "-12", "-15", "-19"},
             {"8", "27", "64", "125"},
@@ -521,8 +559,8 @@ if (quizType == 3) {
         }
 
         // 랜덤 순서로 문제를 출제
-        messageOutput("\수학퀴즈를 시작합니다!\n", 15);
-        messageOutput("문제에서 등장하는 수학 기호 중 *은 곱하기, /은 나누기, n^k는 n의 k제곱으로 이해하시면 됩니다..\n",15);
+        messageOutput("\n수학퀴즈를 시작합니다!\n", 15);
+        messageOutput("문제에서 등장하는 수학 기호 중 *은 곱하기, /은 나누기로 이해하시면 됩니다..\n", 15);
         messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 15);
         messageOutput("준비되셨다면 퀴즈 시작을 위해 아무 키나 입력하십시오...\n", 15);
 
@@ -531,22 +569,30 @@ if (quizType == 3) {
 
         while (1) {
 
-            if (start != 0){
+            if (start != 0) {
+
                 system("cls");
                 break;
+
             }
 
         }
 
         for (int i = 0; i < 9; i++) {
             int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
-            printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
+            messageOutput("\n문제 ", 20);
+            printf("%d", i + 1);
+            messageOutput(": ", 20);
+            messageOutput(questions[questionIndex], 20);
+            messageOutput("\n", 20);
+
 
             // 답안 출력
 
             for (int j = 0; j < 4; j++) {
-                messageOutput("\n", 40);
-                printf("[%d] %s", j + 1, answers[questionIndex][j]);
+                messageOutput("\n", 100);
+                printf("[%d]", j + 1);
+                messageOutput(answers[questionIndex][j], 20);
             }
 
             int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
@@ -568,7 +614,9 @@ if (quizType == 3) {
                 else {
 
                     messageOutput("오답입니다. 정답은 ", 20);
-                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    //printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    printf("[%d] ", collects[questionIndex]);
+                    messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                     messageOutput(" 입니다.", 20);
 
                     messageOutput("점수 획득에 실패합니다.\n", 20);
@@ -583,7 +631,8 @@ if (quizType == 3) {
                 messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
 
                 messageOutput("정답은 ", 20);
-                printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                printf("[%d] ", collects[questionIndex]);
+                messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                 messageOutput(" 입니다.", 20);
 
                 messageOutput("현재 점수는 ", 20);
@@ -591,28 +640,35 @@ if (quizType == 3) {
                 messageOutput("점입니다.\n\n", 20);
             }
         }
-        printf("퀴즈가 종료되었습니다.\n");
-        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);
+
+        /*printf("퀴즈가 종료되었습니다.\n");
+        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);*/
+        messageOutput("퀴즈가 종료되었습니다.\n", 20);
+        printf("%d ", studentID);
+        messageOutput(playerName, 20);
+        messageOutput("님의 점수는 ", 20);
+        printf("%d", score);
+        messageOutput("점입니다.\n", 20);
+
 
 
     }
-    
 
-    
-    
-    
+
+
+
+
     //물리학퀴즈 파트 
-    
-    
-    
-    
-    
-    if (quizType == 4) {
 
+
+
+
+
+    if (quizType == 4) {
         // 문제와 답안, 선지 배열
         char* questions[] = {
-            "움직이고 있는 물체가 일직선으로 등가속도 운동을 하고 있다.\n이 물체의 처음 측정 속도가 4m/s, 마지막 측정 속도가 8m/s이였으며, 이 기간동안 8m만큼 움직였을 때, \n이 물체의 가속도는 ?m/s^2인가?",
-            "지면 위에 무게가 6kg인 물체가 있으며, 그 위에 무게가 8kg인 물체가 있다.\n아래에 있는 물체가 지면에 의해 받는 수직항력은?\n(중력가속도는 10m\s^2이다.)",
+            "움직이고 있는 물체가 일직선으로 등가속도 운동을 하고 있다.\n이 물체의 처음 측정 속도가 4m/s, 마지막 측정 속도가 8m/s이였으며, 이 기간동안 8m만큼 움직였을 때, \n이 물체의 가속도는?",
+            "지면 위에 무게가 6kg인 물체가 있으며, 그 위에 무게가 8kg인 물체가 있다.\n아래에 있는 물체가 지면에 의해 받는 수직항력은?\n(중력가속도는 10m\s²이다.)",
             "물체가 받는 충격력의 크기를 줄이는 일상생활의 예시로 옳지 않은 것은?",
             "용수철 상수가 20N/m인 용수철에 31kg인 물체가 2m/s의 속도로 움직이고 있으며, \n이때 용수철의 길이가 처음보다 7m 늘어난 상태일 때, 물체가 갖는 역학적 에너지의 총합을 구하시오.",
             "열역학 과정 중 부피가 일정한 과정을 무엇이라 하는가?",
@@ -623,19 +679,19 @@ if (quizType == 3) {
         };
 
         int collects[] = {
-            3,
-            4,
-            3,
-            4,
+            2,
             1,
+            1,
+            1,
+            4,
             2,
-            2,
+            4,
             3,
-            1
+            2
         };
 
         char* answers[][4] = {
-            {"1", "2", "3", "4"},
+            {"1m/s²", "2m/s²", "3m/s²", "4m/s²"},
             {"60N", "80N", "120N", "140N"},
             {"에어백", "헬멧", "대포의 포신", "야구 글러브"},
             {"468J", "494J", "521J", "552J"},
@@ -671,7 +727,7 @@ if (quizType == 3) {
         }
 
         // 랜덤 순서로 문제를 출제
-        messageOutput("\물리퀴즈를 시작합니다!\n", 20);
+        messageOutput("\n물리퀴즈를 시작합니다!\n", 20);
         messageOutput("제시되는 문제를 풀고 알맞은 답안의 번호를 입력하시면 됩니다.\n", 15);
         messageOutput("이 문제에 나오는 모든 문제들은 물리1에 나오는 내용이니, 풀기 직전 본인이 물리1 선택자인지 확인해주시길 바랍니다.\n", 15);
         messageOutput("문제는 모두 4지선다 형식으로, 1-4 이외의 번호를 입력하시면 오답 처리됩니다.\n\n", 15);
@@ -682,22 +738,30 @@ if (quizType == 3) {
 
         while (1) {
 
-            if (start != 0){
-            	system("cls");
-            	break;
-			}
+            if (start != 0) {
+
+                system("cls");
+                break;
+
+            }
 
         }
 
         for (int i = 0; i < 9; i++) {
             int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
-            printf("문제 %d: %s\n", i + 1, questions[questionIndex]);
+            messageOutput("\n문제 ", 20);
+            printf("%d", i + 1);
+            messageOutput(": ", 20);
+            messageOutput(questions[questionIndex], 20);
+            messageOutput("\n", 20);
+
 
             // 답안 출력
 
             for (int j = 0; j < 4; j++) {
-                messageOutput("\n", 40);
-                printf("[%d] %s", j + 1, answers[questionIndex][j]);
+                messageOutput("\n", 100);
+                printf("[%d]", j + 1);
+                messageOutput(answers[questionIndex][j], 20);
             }
 
             int correctAnswer = collects[questionIndex];//올바른 답안 출력을 위한 인덱스값 저장
@@ -719,7 +783,9 @@ if (quizType == 3) {
                 else {
 
                     messageOutput("오답입니다. 정답은 ", 20);
-                    printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    //printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                    printf("[%d] ", collects[questionIndex]);
+                    messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                     messageOutput(" 입니다.", 20);
 
                     messageOutput("점수 획득에 실패합니다.\n", 20);
@@ -734,7 +800,8 @@ if (quizType == 3) {
                 messageOutput("잘못된 입력입니다. 1부터 4까지의 숫자를 선택하세요.\n", 20);
 
                 messageOutput("정답은 ", 20);
-                printf("[%d] %s", collects[questionIndex], answers[questionIndex][correctAnswer - 1]);
+                printf("[%d] ", collects[questionIndex]);
+                messageOutput(answers[questionIndex][correctAnswer - 1], 20);
                 messageOutput(" 입니다.", 20);
 
                 messageOutput("현재 점수는 ", 20);
@@ -743,12 +810,19 @@ if (quizType == 3) {
             }
         }
 
-        printf("퀴즈가 종료되었습니다.\n");
-        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);
+        /*printf("퀴즈가 종료되었습니다.\n");
+        printf("%d %s 님의 점수는 %d점입니다.\n", studentID, playerName, score);*/
+        messageOutput("퀴즈가 종료되었습니다.\n", 20);
+        printf("%d ", studentID);
+        messageOutput(playerName, 20);
+        messageOutput("님의 점수는 ", 20);
+        printf("%d", score);
+        messageOutput("점입니다.\n", 20);
+
 
 
     }
-    
+
 
 
     //여기에 다른 부문 삽입
@@ -785,6 +859,6 @@ if (quizType == 3) {
     else messageOutput("\n퀴즈를 종료합니다.\n\n", 20);
 
     return 0;
-    
-	
+
+
 }//main 닫히는곳
