@@ -151,7 +151,7 @@ int main() {
         messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학\n", 20);
         scanf("%d", &quizType);
 
-        if (0 < quizType <= 4) break;
+        if (quizType <= 4 and quizType>0) break;
         else messageOutput("잘못된 입력입니다. 1-4의 숫자를 입력하세요.", 20);
 
     }
