@@ -1,4 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h> //메인 헤더파일
 #include <stdlib.h> //난수 생성을 위한 헤더파일
 #include <time.h> //시간값을 통한 완전난수 생성을 위한 헤더파일
@@ -14,7 +13,6 @@
     2-1.현재는 제작자의 SSD로 경로를 설정해놓은 상태입니다. 변경할 시 경로를 알맞은 드라이브로 변경하세요.
 
 */
-
 
 struct PlayerInfo {
     char name[10000];
@@ -83,7 +81,6 @@ void displayRanking(struct PlayerInfo players[], int numPlayers) {
 
 
 
-
 int main() {
     int quizType = 0, studentID, score = 0, startOption;
     char playerName[10000] = "null";
@@ -94,12 +91,14 @@ int main() {
     messageOutput("ver 1.9\n제작일자:20231118 \n프로그램 제작:10133 한주원\n\n---문제 출제---\n[한국사]:10133 한주원\n[영어]:10117 윤지민\n[수학, 물리학]:20431 조승현", 20);
     messageOutput("\n**********************************************************\n\n", 10);
 
+   	
+
+    while (1) {
+    	
     messageOutput("[1]퀴즈 시작하기\n", 15);
     messageOutput("[2]랭킹보기\n", 15);
     scanf("%d", &startOption);
-
-
-    while (1) {
+    	
         if (startOption == 2) {
 
             struct PlayerInfo players[100];
@@ -111,24 +110,46 @@ int main() {
 
 
             displayRanking(players, numPlayers);
+            
+            while(1){
+            	
             printf("\n\n");
             messageOutput("[0]종료하기\n", 20);
             messageOutput("[1]퀴즈 시작하기\n", 20);
             int startOption_2;
             scanf("%d", &startOption_2);
-
-            if (startOption_2 == 1) {
+            
+            
+      	
+			if (startOption_2 == 1) {
                 messageOutput("\n퀴즈를 시작합니다!", 15);
                 break;
             }
-            else return 0;
+            
+            
+            else if(startOption_2 == 0){
+            	messageOutput("프로그램을 종료합니다.",20);
+            	return 0;
+			}
+			
+			
+			else messageOutput("잘못된 입력입니다. 올바른 값을 입력하세요",20);
+            	
+			}
+            
+			break;
 
         }
+
+
 
         if (startOption == 1) {
             messageOutput("\n퀴즈를 시작합니다!", 15);
             break;
         }
+        
+        else messageOutput("잘못된 입력입니다. 올바른 값을 입력하세요\n\n",20);
+        
     }
 
 
@@ -144,14 +165,14 @@ int main() {
     messageOutput(" ", 20);
     messageOutput(playerName, 20);
     messageOutput("님 환영합니다", 20);
+    messageOutput("\n퀴즈 부문을 선택해주세요", 20);
 
     while (1) {
 
-        messageOutput("\n퀴즈 부문을 선택해주세요", 20);
         messageOutput("\n\n[1]한국사\n[2]영어\n[3]수학\n[4]물리학\n", 20);
         scanf("%d", &quizType);
 
-        if (quizType <= 4 and quizType>0) break;
+        if (0<quizType and quizType <= 4) break;
         else messageOutput("잘못된 입력입니다. 1-4의 숫자를 입력하세요.", 20);
 
     }
@@ -233,16 +254,16 @@ int main() {
         char start;
         scanf("%s", &start);
 
+
         while (1) {
 
             if (start != 0) {
-
                 system("cls");
                 break;
-
             }
 
         }
+
 
         for (int i = 0; i < 9; i++) {
             int questionIndex = questionOrder[i] - 1; // 배열 인덱스를 계산
